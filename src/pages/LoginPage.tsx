@@ -34,7 +34,7 @@ const LoginPage = () => {
         <div style={{ position: 'relative' }}>
           <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(245,237,230,0.4)', marginBottom: '16px' }}>✦ tagline</div>
           <p style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 700, color: '#f5ede6', lineHeight: 1.25, margin: 0 }}>
-            Split without<br />the awkward.
+            Split without<br />the awkwardness.
           </p>
         </div>
 
