@@ -1,192 +1,111 @@
-# SplitMint 🌿
+# SplitMint
 
-> An intelligent bill-splitting app with AI-powered expense parsing, real-time balance tracking, and group financial management — built with React, TypeScript, and Groq AI.
-
----
-
-## ✨ Feature List
-
-### Core Expense Splitting
-- **Groups** — Create up to 4-person groups; each group has its own ledger
-- **Equal Split** — Paise-precise division with remainder assigned to first participant
-- **Custom Split** — Manually assign exact rupee amounts per person (live validation)
-- **Percentage Split** — Assign % shares summing to 100 (live validation)
-- **Expense CRUD** — Add, edit, and delete expenses with full balance recalculation
-- **Settlements** — Greedy algorithm computes minimum transactions to settle all debts
-- **Mark as Settled** — Record repayments directly from the Settle Up tab
-
-### MintSense AI ✦ (Powered by Groq / Llama 3.3)
-- **Natural Language Parsing** — Describe an expense in plain English; AI pre-fills the form
-- **Auto-Categorization** — 800ms debounced AI categorization as you type the description
-- **Group Summary** — 3-4 sentence AI-generated financial summary for any group
-- **Explain Settlements** — Plain-English explanation of who needs to pay whom
-
-### Visualizations & Analytics
-- **Balance Matrix** — Directional debt table showing who owes whom
-- **Contribution Chart** — Recharts bar chart of total paid per participant
-- **Summary Cards** — Total spent, you owe, you're owed (per group and globally)
-- **Transaction History** — Full filterable, sortable history across all groups with CSV export
-
-### UX & Polish
-- **Auth** — Register / Login with localStorage persistence (Zustand + `persist`)
-- **Toast Notifications** — Success/error feedback for all actions (react-hot-toast)
-- **Confirm Modals** — Custom dark-themed modals replacing `window.confirm`
-- **Loading States** — Spinners on all async operations (form submit, AI calls)
-- **Empty States** — Contextual CTAs when groups/expenses are empty
-- **Participant Guard** — Prevents removing participants linked to existing expenses
-- **Mobile Navigation** — Bottom nav bar for mobile viewports
-- **`(You)` Labels** — Current user is tagged in all participant lists
+SplitMint is an intelligent bill-splitting application featuring AI-powered expense parsing, real-time balance tracking, and group financial management. The application is built with React, TypeScript, and Groq AI to provide a premium, efficient experience for managing shared finances.
 
 ---
 
-## 🛠 Tech Stack
+## Technical Features
 
-| Layer | Technology |
+### Core Expense Management
+- **Multi-Group Support**: Create and manage multiple groups with independent ledgers.
+- **Precision Splitting**: Automatic equal division with remainder handling to ensure absolute accuracy.
+- **Custom Distributions**: Manually assign exact currency amounts with real-time validation.
+- **Percentage-Based Shares**: Allocate expenses based on percentage shares with automated total validation.
+- **Full Lifecycle Management**: Add, modify, and remove expenses with instantaneous global balance recalculation.
+- **Debt Optimization**: Utilizes a greedy algorithm to compute the minimum number of transactions required to settle all debts.
+- **Settlement Tracking**: Direct recording of repayments and settlement status within the application.
+
+### MintSense AI Intelligence
+- **Natural Language Processing**: Parse raw text descriptions into structured expense data automatically.
+- **Automated Categorization**: Real-time, debounced AI categorization based on expense descriptions.
+- **Insight Generation**: Automated financial summaries providing concise overviews of group spending patterns.
+- **Settlement Clarification**: Plain-language explanations of complex settlement matrices.
+
+### Analytics and Visualization
+- **Directional Debt Matrix**: A comprehensive table showing precise debt flows between all participants.
+- **Financial Visualizations**: Integrated Recharts components for visualizing contribution and spending metrics.
+- **Global Overview**: Consolidated summary cards for total expenditure, outstanding debt, and expected credits.
+- **Audit Logging**: Comprehensive transaction history with advanced filtering, sorting, and CSV export capabilities.
+
+### User Experience and Robustness
+- **Persistence Layer**: LocalStorage-based state persistence using Zustand middleware for zero-latency data recovery.
+- **Reliability Guards**: Prevents data inconsistency, such as removing participants who have active transaction history.
+- **Interface Flexibility**: Optimized navigation including a dedicated mobile-responsive bottom navigation system.
+
+---
+
+## Technology Stack
+
+| Component | Technology |
 |---|---|
-| Framework | React 18 + TypeScript |
-| Build Tool | Vite 8 |
-| Styling | Tailwind CSS v4 |
-| State / Persistence | Zustand + `persist` middleware (localStorage) |
-| Routing | React Router v7 |
-| AI | Groq API — `llama-3.3-70b-versatile` |
-| Charts | Recharts |
-| Date Formatting | date-fns |
-| Toast | react-hot-toast |
-| IDs | uuid v4 |
+| Core Framework | React 18 / TypeScript |
+| Build System | Vite 8 |
+| Styling Architecture | Tailwind CSS v4 |
+| State Management | Zustand with Persistence Middleware |
+| Application Routing | React Router v7 |
+| Artificial Intelligence | Groq API (Llama 3.3 70B model) |
+| Graphic Components | Recharts |
+| Logical Utilities | Date-fns, UUID v4 |
 
 ---
 
-## 🚀 Setup & Running Locally
+## Installation and Deployment
 
-### 1. Install dependencies
+### Local Development Setup
 
-```bash
-npm install
-```
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-### 2. Configure environment variables
+2. **Environment Configuration**
+   Create a `.env` file in the root directory:
+   ```env
+   VITE_GROQ_API_KEY=your_api_key_here
+   ```
+   API keys can be obtained from the Groq Console.
 
-Create a `.env` file in the project root:
+3. **Execute Development Server**
+   ```bash
+   npm run dev
+   ```
+   The application will be accessible at http://localhost:5173.
 
-```env
-VITE_GROQ_API_KEY=your_groq_api_key_here
-```
+4. **Production Compilation**
+   ```bash
+   npm run build
+   ```
+   The production-ready assets will be generated in the `dist/` directory.
 
-> Get a free API key at [console.groq.com](https://console.groq.com)
+### Vercel Deployment
 
-### 3. Start the development server
+The project includes a `vercel.json` configuration for seamless deployment on Vercel.
 
-```bash
-npm run dev
-```
-
-App runs at **http://localhost:5173**
-
-### 4. Production build
-
-```bash
-npm run build
-```
-
-Output is in the `dist/` directory.
-
----
-
-## ☁️ Deploying to Vercel
-
-### Option A: Vercel CLI
-
-```bash
-npm i -g vercel
-vercel
-```
-
-Follow the prompts. Set `VITE_GROQ_API_KEY` in Vercel's **Environment Variables** settings.
-
-### Option B: Vercel Dashboard (recommended)
-
-1. Push the repo to GitHub
-2. Import the repo at [vercel.com/new](https://vercel.com/new)
-3. Set **Framework Preset** → `Vite`
-4. Add environment variable `VITE_GROQ_API_KEY` in **Settings → Environment Variables**
-5. Deploy
-
-> The included `vercel.json` handles SPA routing — all paths are rewritten to `index.html`.
+1. Connect the repository to Vercel.
+2. Ensure the `VITE_GROQ_API_KEY` is configured in the environment variables section.
+3. The configuration handles Single Page Application (SPA) routing by redirecting all paths to `index.html`.
 
 ---
 
-## 🗄 Data Persistence
+## Technical Architecture
 
-SplitMint uses **Zustand's `persist` middleware** to store all state (users, groups, expenses) in `localStorage` under the key `splitmint-storage`.
+### Data Architecture
+SplitMint utilizes a client-side architecture with Zustand for state management. Data is persisted in `localStorage` under the `splitmint-storage` key, allowing for full state recovery across browser sessions without requiring a dedicated backend.
 
-- **Page refresh** → all data is instantly restored
-- **Multiple tabs** → all tabs share the same localStorage state
-- **No backend required** — fully client-side
-
-To reset all data, run in the browser console:
-```js
-localStorage.removeItem('splitmint-storage')
-```
+### Balance Calculation Engine
+Balance distributions are computed by aggregating deltas across all transactions:
+- **Payers**: Credit added for the total transaction amount.
+- **Participants**: Debit deducted based on their calculated share.
+- **Net Balance**: The sum of all credits and debits, where positive values indicate credit and negative values indicate debt.
 
 ---
 
-## 📁 Project Structure
+## Verified System Behaviors
 
-```
-src/
-├── components/
-│   ├── AiModal.tsx          # MintSense AI result modal
-│   ├── BalanceTable.tsx     # Directional debt matrix
-│   ├── BottomNav.tsx        # Mobile navigation bar
-│   ├── ConfirmModal.tsx     # Reusable confirmation dialog
-│   ├── ContributionChart.tsx # Recharts bar visualization
-│   ├── Ledger.tsx           # Expense list with color coding
-│   ├── ProtectedRoute.tsx   # Auth guard
-│   ├── Settlements.tsx      # Settlement list + mark settled
-│   └── SummaryCards.tsx     # Balance summary cards
-├── pages/
-│   ├── DashboardPage.tsx    # Global overview + group list
-│   ├── ExpenseFormPage.tsx  # Add/edit expense + AI parse
-│   ├── GroupDetailPage.tsx  # Group tabs: overview/expenses/balances/settle
-│   ├── History.tsx          # Transaction history + filters + CSV export
-│   ├── LoginPage.tsx
-│   └── RegisterPage.tsx
-├── services/
-│   └── mintSense.ts         # All Groq AI API calls
-├── store/
-│   └── index.ts             # Zustand store with persist
-├── types/
-│   └── index.ts             # TypeScript interfaces
-├── utils/
-│   ├── format.ts            # Intl currency formatter
-│   └── splitCalculator.ts   # Split math + balance + settlement engine
-└── App.tsx                  # Routes
-```
-
----
-
-## 🧮 Balance Logic Explained
-
-For every expense:
-- **Payer** gets `+amount` (they fronted the money)
-- **Each share holder** gets `-share.amount` (they consumed that value)
-
-Net balance = sum of all deltas across all expenses.
-- Positive balance → you are **owed** money
-- Negative balance → you **owe** money
-
-Settlements use a **greedy two-pointer algorithm** on creditors vs debtors, minimising the total number of transactions needed.
-
----
-
-## ✅ Verified Behaviours
-
-| Scenario | Result |
+| Feature | Verified Behavior |
 |---|---|
-| Delete a group | Atomically removes group + all its expenses in one store update |
-| Edit an expense | `updateExpense` replaces the record; all balance-derived views recalculate reactively |
-| Balance matrix | Row person owes column person the displayed amount (directional) |
-| Page refresh | All data restores from localStorage via Zustand persist |
-| Remove participant | Blocked with an error toast if they appear in any expense |
-| Custom split validation | Save button disabled until amounts sum within ±₹0.01 |
-| Percentage validation | Save button disabled until percentages sum within ±0.01% of 100 |
+| Group Deletion | Atomic removal of group records and associated expense history. |
+| Reactive Updates | Immediate recalculation of all derived views upon expense modification. |
+| Matrix Integrity | Verified directional accuracy in the debt matrix. |
+| Participant Integrity | Deletion protection for participants with link-to-history constraints. |
+| Input Validation | Strict enforcement of split totals for custom and percentage modes. |
